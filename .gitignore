@@ -1,0 +1,9 @@
+# Ignore backend secrets
+backend/.env
+backend/venv/
+backend/__pycache__/
+backend/faiss_index/
+
+# Ignore frontend junk
+frontend/node_modules/
+frontend/dist/
