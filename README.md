@@ -65,7 +65,7 @@ npm run dev
 
 ## 🌟 Demo
 
-[Live Demo](https://rag-chat-frontend.onrender.com) | [API Docs](https://rag-chat-backend.onrender.com/docs)
+[🚀 Live Demo](https://rag-chat-frontend-p5fx.onrender.com) | [📚 API Docs](https://rag-chat-backend-730g.onrender.com/docs)
 
 > **Note**: Free tier services may take 30 seconds to wake up from sleep. This is normal for portfolio projects.
 

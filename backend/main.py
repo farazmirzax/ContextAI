@@ -88,7 +88,7 @@ app = FastAPI(lifespan=lifespan)
 allowed_origins = [
     "http://localhost:3000",  # React dev server
     "http://localhost:5173",  # Vite dev server
-    "https://rag-chat-frontend.onrender.com",  # Replace with your actual Render URL
+    "https://rag-chat-frontend-p5fx.onrender.com",  # Your actual frontend URL
     "https://your-custom-domain.com",  # If you add a custom domain later
 ]
 
