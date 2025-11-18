@@ -61,12 +61,21 @@ async def lifespan(app: FastAPI):
     # This code runs ONCE when the server starts
     global embeddings_model, llm
     print("--- Loading models at startup... ---")
-    embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    # Using a capable model that's currently supported
-    llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
-    print(f"✅ Using model: llama-3.1-8b-instant")
-    print(f"✅ Embeddings model: all-MiniLM-L6-v2")
-    print("--- Models loaded successfully. Server is ready. ---")
+    try:
+        embeddings_model = HuggingFaceEmbeddings(
+            model_name="all-MiniLM-L6-v2",
+            model_kwargs={'device': 'cpu'}  # Force CPU for free tier
+        )
+        print(f"✅ Embeddings model loaded: all-MiniLM-L6-v2")
+        
+        # Using a capable model that's currently supported
+        llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+        print(f"✅ LLM model loaded: llama-3.1-8b-instant")
+        
+        print("--- 🚀 Models loaded successfully. Server is ready! ---")
+    except Exception as e:
+        print(f"❌ Error loading models: {e}")
+        raise
     yield
     # This code runs ONCE when the server shuts down (if needed)
     print("--- Server shutting down. ---")

@@ -2,10 +2,20 @@
 # Build script for Render
 set -o errexit
 
-# Install dependencies
-pip install -r requirements.txt
+echo "🚀 Starting backend build..."
 
-# Download NLTK data (if needed for sentence transformers)
-python -c "import nltk; nltk.download('punkt', quiet=True)"
+# Upgrade pip for better dependency resolution
+pip install --upgrade pip
 
-echo "Backend build completed successfully!"
+# Install dependencies with optimizations for Render
+echo "📦 Installing Python dependencies..."
+pip install -r requirements.txt --no-cache-dir
+
+# Verify critical imports work
+echo "✅ Verifying installations..."
+python -c "import fastapi; print('FastAPI OK')"
+python -c "import langchain; print('LangChain OK')"
+python -c "import sentence_transformers; print('SentenceTransformers OK')"
+python -c "from langchain_groq import ChatGroq; print('Groq OK')"
+
+echo "🎉 Backend build completed successfully!"
