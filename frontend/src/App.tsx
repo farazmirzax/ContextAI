@@ -27,12 +27,15 @@ function App() {
       <div className="flex flex-col flex-1">
         {/* Header */}
         <header className="text-center p-6 border-b border-gray-700 bg-gray-900">
-          <h1 className="text-2xl font-bold text-white">
-            Chat With Your PDF
+          <h1 className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            ContextAI
           </h1>
+          <p className="text-sm text-gray-400 mt-1">
+            Intelligent Document Assistant
+          </p>
           {selectedDocument && (
             <p className="text-sm text-gray-400 mt-1">
-              Currently chatting with: {selectedDocument.filename}
+              📄 Currently chatting with: {selectedDocument.filename}
             </p>
           )}
         </header>

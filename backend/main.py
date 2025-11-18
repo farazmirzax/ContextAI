@@ -68,11 +68,23 @@ async def lifespan(app: FastAPI):
         )
         print(f"✅ Embeddings model loaded: all-MiniLM-L6-v2")
         
-        # Using a capable model that's currently supported
+    # Try Groq first, fallback to OpenAI if needed
+    try:
         llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
-        print(f"✅ LLM model loaded: llama-3.1-8b-instant")
-        
-        print("--- 🚀 Models loaded successfully. Server is ready! ---")
+        # Test Groq connection
+        test_response = llm.invoke("test")
+        print(f"✅ LLM model loaded: llama-3.1-8b-instant (Groq)")
+    except Exception as groq_error:
+        print(f"⚠️ Groq unavailable: {groq_error}")
+        print("🔄 Falling back to OpenAI...")
+        from langchain_openai import ChatOpenAI
+        openai_key = os.getenv("OPENAI_API_KEY")
+        if openai_key:
+            llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+            print(f"✅ LLM model loaded: gpt-3.5-turbo (OpenAI)")
+        else:
+            print("❌ No fallback API key available")
+            raise Exception("Both Groq and OpenAI unavailable")        print("--- 🚀 Models loaded successfully. Server is ready! ---")
     except Exception as e:
         print(f"❌ Error loading models: {e}")
         raise

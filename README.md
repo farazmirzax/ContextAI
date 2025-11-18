@@ -1,6 +1,6 @@
-# 🤖 RAG Chat Application
+# � ContextAI - Intelligent Document Assistant
 
-A production-ready Retrieval-Augmented Generation (RAG) application built with FastAPI, React, and LangChain. Features conversational memory and streaming responses for an enhanced chat experience.
+A production-ready Retrieval-Augmented Generation (RAG) application built with FastAPI, React, and LangChain. ContextAI transforms how you interact with documents through intelligent conversation and streaming responses.
 
 ## 🚀 Features
 
@@ -68,6 +68,8 @@ npm run dev
 [🚀 Live Demo](https://rag-chat-frontend-p5fx.onrender.com) | [📚 API Docs](https://rag-chat-backend-730g.onrender.com/docs)
 
 > **Note**: Free tier services may take 30 seconds to wake up from sleep. This is normal for portfolio projects.
+
+> **Current Status**: Groq API is experiencing temporary outages (Nov 18, 2025). The application architecture and deployment are fully functional - this demonstrates real-world API reliability considerations.
 
 ## 📁 Project Structure
 ```

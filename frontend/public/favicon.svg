@@ -1,0 +1,31 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- AI Brain Circuit Pattern -->
+  <rect width="32" height="32" rx="6" fill="url(#gradient)" />
+  
+  <!-- Neural Network Nodes -->
+  <circle cx="8" cy="8" r="2" fill="#fff" opacity="0.9" />
+  <circle cx="16" cy="6" r="2" fill="#fff" opacity="0.9" />
+  <circle cx="24" cy="8" r="2" fill="#fff" opacity="0.9" />
+  <circle cx="6" cy="16" r="2" fill="#fff" opacity="0.8" />
+  <circle cx="16" cy="16" r="3" fill="#fff" />
+  <circle cx="26" cy="16" r="2" fill="#fff" opacity="0.8" />
+  <circle cx="8" cy="24" r="2" fill="#fff" opacity="0.9" />
+  <circle cx="16" cy="26" r="2" fill="#fff" opacity="0.9" />
+  <circle cx="24" cy="24" r="2" fill="#fff" opacity="0.9" />
+  
+  <!-- Neural Connections -->
+  <path d="M8 8 L16 6 M16 6 L24 8 M8 8 L6 16 M24 8 L26 16 M6 16 L16 16 M16 16 L26 16 M6 16 L8 24 M26 16 L24 24 M8 24 L16 26 M16 26 L24 24 M16 6 L16 16 M16 16 L16 26" 
+        stroke="#fff" stroke-width="0.5" opacity="0.4" />
+  
+  <!-- Central "C" for Context -->
+  <path d="M13 16 A3 3 0 0 1 19 16 A3 3 0 0 1 13 16 Z" 
+        stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" 
+        stroke-dasharray="8 2" opacity="0.8" />
+  
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
