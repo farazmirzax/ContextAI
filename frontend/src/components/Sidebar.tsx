@@ -7,6 +7,7 @@ interface SidebarProps {
   isLoading: boolean;
   onDocumentSelect: (docId: string) => void;
   onFileUpload: (file: File) => void;
+  onBackToHome?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -15,6 +16,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isLoading,
   onDocumentSelect,
   onFileUpload,
+  onBackToHome,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -35,6 +37,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div className="w-60 border-r border-gray-700 bg-gray-900 p-4 flex flex-col">
+      {/* Back to Home Button */}
+      {onBackToHome && (
+        <button
+          onClick={onBackToHome}
+          className="mb-4 flex items-center text-gray-400 hover:text-white transition-colors duration-200"
+        >
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Home
+        </button>
+      )}
+      
       <h2 className="text-lg font-semibold text-white mb-4">My Documents</h2>
       
       {/* Upload Button */}

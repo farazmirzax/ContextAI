@@ -1,7 +1,10 @@
-import { Sidebar, ChatArea, ChatInput } from './components';
+import { useState } from 'react';
+import { LandingPage, ChatInterface } from './components';
 import { useChat } from './hooks/useChat';
 
 function App() {
+  const [showChat, setShowChat] = useState(false);
+  
   const {
     messages,
     isLoading,
@@ -12,49 +15,37 @@ function App() {
     handleSendMessage,
   } = useChat();
 
-  return (
-    <div className="flex h-screen w-full bg-gray-950 text-gray-100">
-      {/* Sidebar */}
-      <Sidebar
-        documents={documents}
-        selectedDocumentId={selectedDocument?.document_id || null}
+  const handleFileUploadWithTransition = async (file: File) => {
+    await handleFileUpload(file);
+    setShowChat(true);
+  };
+
+  const handleBackToHome = () => {
+    setShowChat(false);
+  };
+
+  // Show landing page if no documents or user clicked back to home
+  if (!showChat || documents.length === 0) {
+    return (
+      <LandingPage
+        onFileUpload={handleFileUploadWithTransition}
         isLoading={isLoading}
-        onDocumentSelect={handleDocumentSelect}
-        onFileUpload={handleFileUpload}
       />
+    );
+  }
 
-      {/* Main Chat Area */}
-      <div className="flex flex-col flex-1">
-        {/* Header */}
-        <header className="text-center p-6 border-b border-gray-700 bg-gray-900">
-          <h1 className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            ContextAI
-          </h1>
-          <p className="text-sm text-gray-400 mt-1">
-            Intelligent Document Assistant
-          </p>
-          {selectedDocument && (
-            <p className="text-sm text-gray-400 mt-1">
-              📄 Currently chatting with: {selectedDocument.filename}
-            </p>
-          )}
-        </header>
-        
-        {/* Chat Messages Area */}
-        <ChatArea
-          messages={messages}
-          isLoading={isLoading}
-          selectedDocument={selectedDocument}
-        />
-
-        {/* Input Form */}
-        <ChatInput
-          isLoading={isLoading}
-          hasSelectedDocument={!!selectedDocument}
-          onSendMessage={handleSendMessage}
-        />
-      </div>
-    </div>
+  // Show chat interface when documents are uploaded
+  return (
+    <ChatInterface
+      messages={messages}
+      isLoading={isLoading}
+      documents={documents}
+      selectedDocument={selectedDocument}
+      onDocumentSelect={handleDocumentSelect}
+      onFileUpload={handleFileUpload}
+      onSendMessage={handleSendMessage}
+      onBackToHome={handleBackToHome}
+    />
   );
 }
 

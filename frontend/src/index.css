@@ -1,6 +1,72 @@
 @import "tailwindcss";
 
 /* Custom styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
+
+/* Codex-style animated code background */
+.code-layer-1, .code-layer-2, .code-layer-3 {
+  position: absolute;
+  inset: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: white;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.code-line {
+  position: absolute;
+  white-space: nowrap;
+  animation: drift 60s linear infinite;
+  width: max-content;
+}
+
+.code-layer-2 .code-line {
+  animation-duration: 45s;
+  opacity: 1;
+}
+
+.code-layer-3 .code-line {
+  animation-duration: 30s;
+  opacity: 1;
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+/* Position specific code lines */
+.code-line-1 { top: 10%; animation-delay: 0s; }
+.code-line-2 { top: 25%; animation-delay: 2s; }
+.code-line-3 { top: 40%; animation-delay: 4s; }
+.code-line-4 { top: 55%; animation-delay: 6s; }
+.code-line-5 { top: 70%; animation-delay: 8s; }
+.code-line-6 { top: 85%; animation-delay: 10s; }
+.code-line-7 { top: 15%; animation-delay: 1s; }
+.code-line-8 { top: 30%; animation-delay: 3s; }
+.code-line-9 { top: 45%; animation-delay: 5s; }
+.code-line-10 { top: 60%; animation-delay: 7s; }
+.code-line-11 { top: 75%; animation-delay: 9s; }
+.code-line-12 { top: 20%; animation-delay: 0.5s; }
+.code-line-13 { top: 35%; animation-delay: 2.5s; }
+.code-line-14 { top: 50%; animation-delay: 4.5s; }
+.code-line-15 { top: 65%; animation-delay: 6.5s; }
+.code-line-16 { top: 80%; animation-delay: 8.5s; }
