@@ -24,37 +24,38 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   const isDisabled = isLoading || !hasSelectedDocument;
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3 p-6 border-t border-gray-700 bg-gray-900">
+    <form onSubmit={handleSubmit} className="flex gap-3 p-6 border-t border-gray-800/50 bg-black/80 backdrop-blur-sm">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder={
           !hasSelectedDocument 
-            ? "Please select a document first" 
+            ? "Select document to initialize..." 
             : isLoading 
-              ? "Waiting for response..." 
-              : "Ask about the selected document..."
+              ? "Processing query..." 
+              : "Enter query..."
         }
         disabled={isDisabled}
         className={`
-          flex-1 p-3 rounded-lg border transition-all duration-200
+          flex-1 p-4 rounded border transition-all duration-200 font-light text-sm
           ${isDisabled 
-            ? 'bg-gray-800 border-gray-600 text-gray-500 cursor-not-allowed' 
-            : 'bg-gray-800 border-gray-600 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20'
+            ? 'bg-gray-900/30 border-gray-800 text-gray-600 cursor-not-allowed' 
+            : 'bg-gray-900/50 border-gray-700 text-gray-200 focus:border-gray-500 focus:bg-gray-800/50'
           }
-          outline-none
+          outline-none backdrop-blur-sm
         `}
       />
       <button
         type="submit"
         disabled={isDisabled || !input.trim()}
         className={`
-          px-6 py-3 rounded-lg font-medium transition-all duration-200
+          px-6 py-4 rounded border font-light text-sm transition-all duration-200
           ${isDisabled || !input.trim()
-            ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-            : 'bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-md hover:shadow-lg'
+            ? 'bg-gray-900/30 border-gray-800 text-gray-600 cursor-not-allowed'
+            : 'bg-gray-800/50 border-gray-700 text-gray-300 hover:bg-gray-700/50 hover:text-white hover:border-gray-600'
           }
+          backdrop-blur-sm
         `}
       >
         Send

@@ -23,7 +23,30 @@ export function ChatInterface({
   onBackToHome,
 }: ChatInterfaceProps) {
   return (
-    <div className="flex h-screen w-full bg-gray-950 text-gray-100">
+    <div className="flex h-screen w-full bg-black text-gray-100 relative overflow-hidden">
+      {/* Codex-style Background for Chat */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Subtle Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-3"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+              linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px'
+          }}
+        ></div>
+        
+        {/* Floating Neural Network Indicators */}
+        <div className="chat-neural-layer">
+          <div className="neural-node neural-node-1">◉</div>
+          <div className="neural-node neural-node-2">◎</div>
+          <div className="neural-node neural-node-3">○</div>
+          <div className="neural-node neural-node-4">●</div>
+        </div>
+      </div>
+
       {/* Sidebar */}
       <Sidebar
         documents={documents}
@@ -35,19 +58,22 @@ export function ChatInterface({
       />
 
       {/* Main Chat Area */}
-      <div className="flex flex-col flex-1">
-        {/* Header */}
-        <header className="text-center p-6 border-b border-gray-700 bg-gray-900">
-          <h1 className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+      <div className="flex flex-col flex-1 relative z-10">
+        {/* Header - Codex Style */}
+        <header className="text-center p-6 border-b border-gray-800/50 bg-black/80 backdrop-blur-sm">
+          <h1 className="text-3xl font-light text-white mb-2 tracking-wider">
             ContextAI
           </h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-gray-400 font-light">
             Intelligent Document Assistant
           </p>
           {selectedDocument && (
-            <p className="text-sm text-gray-400 mt-1">
-              📄 Currently chatting with: {selectedDocument.filename}
-            </p>
+            <div className="mt-3 flex items-center justify-center gap-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <p className="text-xs text-gray-500 font-light">
+                Active: {selectedDocument.filename}
+              </p>
+            </div>
           )}
         </header>
         

@@ -24,24 +24,24 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
     messages[messages.length - 1].sender === 'user';
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 bg-gray-900">
+    <div className="flex-1 overflow-y-auto p-6 bg-black/80">
       {messages.length === 0 && !isLoading ? (
         <div className="flex items-center justify-center h-full">
-          <div className="text-center text-gray-500">
+          <div className="text-center text-gray-600">
             {selectedDocument ? (
               <>
-                <div className="text-2xl mb-2">💬</div>
-                <div className="text-lg mb-2">Ready to chat!</div>
-                <div className="text-sm">
-                  Ask a question about "{selectedDocument.filename}"
+                <div className="text-sm mb-3 font-light">READY</div>
+                <div className="text-lg mb-2 font-light text-gray-300">Begin Analysis</div>
+                <div className="text-xs text-gray-500">
+                  Query: {selectedDocument.filename}
                 </div>
               </>
             ) : (
               <>
-                <div className="text-4xl mb-4">📄</div>
-                <div className="text-xl mb-2">Welcome to PDF Chat</div>
-                <div className="text-sm">
-                  Please upload or select a document to start chatting.
+                <div className="text-xs mb-3 font-light tracking-wider">WAITING</div>
+                <div className="text-lg mb-2 font-light text-gray-400">No Document Selected</div>
+                <div className="text-xs text-gray-600">
+                  Load document to initialize conversation.
                 </div>
               </>
             )}

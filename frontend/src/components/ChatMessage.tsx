@@ -9,18 +9,26 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
   const isUser = message.sender === 'user';
 
   return (
-    <div className={`flex mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
-      <div
-        className={`
-          max-w-[70%] p-3 rounded-2xl shadow-sm
-          ${isUser 
-            ? 'bg-blue-600 text-white rounded-br-md' 
-            : 'bg-gray-700 text-gray-100 rounded-bl-md'
-          }
-          whitespace-pre-wrap wrap-break-word
-        `}
-      >
-        {message.text}
+    <div className={`flex mb-6 ${isUser ? 'justify-end' : 'justify-start'}`}>
+      <div className={`max-w-[80%] ${isUser ? 'text-right' : 'text-left'}`}>
+        {/* Message Label */}
+        <div className={`text-xs text-gray-500 mb-1 font-light tracking-wider ${isUser ? 'text-right' : 'text-left'}`}>
+          {isUser ? 'USER' : 'CONTEXTAI'}
+        </div>
+        
+        {/* Message Content */}
+        <div
+          className={`
+            p-4 border font-light text-sm leading-relaxed
+            ${isUser 
+              ? 'bg-gray-900/50 text-gray-200 border-gray-700 rounded-l-lg rounded-tr-lg' 
+              : 'bg-gray-800/30 text-gray-300 border-gray-700/50 rounded-r-lg rounded-tl-lg'
+            }
+            whitespace-pre-wrap break-words backdrop-blur-sm
+          `}
+        >
+          {message.text}
+        </div>
       </div>
     </div>
   );
@@ -30,12 +38,23 @@ interface LoadingMessageProps {}
 
 export const LoadingMessage: React.FC<LoadingMessageProps> = () => {
   return (
-    <div className="flex justify-start mb-4">
-      <div className="bg-gray-700 text-gray-100 p-3 rounded-2xl rounded-bl-md">
-        <div className="flex space-x-1">
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+    <div className="flex justify-start mb-6">
+      <div className="max-w-[80%]">
+        {/* Loading Label */}
+        <div className="text-xs text-gray-500 mb-1 font-light tracking-wider">
+          CONTEXTAI
+        </div>
+        
+        {/* Loading Content */}
+        <div className="bg-gray-800/30 text-gray-300 border border-gray-700/50 p-4 rounded-r-lg rounded-tl-lg backdrop-blur-sm">
+          <div className="flex items-center space-x-2">
+            <div className="flex space-x-1">
+              <div className="w-1 h-1 bg-gray-400 rounded-full animate-pulse"></div>
+              <div className="w-1 h-1 bg-gray-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+              <div className="w-1 h-1 bg-gray-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+            </div>
+            <span className="text-xs text-gray-500 font-light">Processing...</span>
+          </div>
         </div>
       </div>
     </div>

@@ -70,3 +70,53 @@ body {
 .code-line-14 { top: 50%; animation-delay: 4.5s; }
 .code-line-15 { top: 65%; animation-delay: 6.5s; }
 .code-line-16 { top: 80%; animation-delay: 8.5s; }
+
+/* Chat Interface Neural Network Animation */
+.chat-neural-layer {
+  position: absolute;
+  inset: 0;
+  font-size: 8px;
+  color: white;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.neural-node {
+  position: absolute;
+  animation: pulse-neural 4s ease-in-out infinite;
+}
+
+.neural-node-1 {
+  top: 20%;
+  right: 15%;
+  animation-delay: 0s;
+}
+
+.neural-node-2 {
+  top: 60%;
+  right: 8%;
+  animation-delay: 1s;
+}
+
+.neural-node-3 {
+  top: 40%;
+  right: 25%;
+  animation-delay: 2s;
+}
+
+.neural-node-4 {
+  top: 80%;
+  right: 18%;
+  animation-delay: 3s;
+}
+
+@keyframes pulse-neural {
+  0%, 100% {
+    opacity: 0.05;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scale(1.2);
+  }
+}
