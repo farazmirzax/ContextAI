@@ -1,0 +1,21 @@
+# Render deployment configuration
+services:
+  - type: web
+    name: rag-chat-backend
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "python main.py"
+    plan: free
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    
+  - type: web
+    name: rag-chat-frontend
+    env: node
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview"
+    plan: free
+    staticPublishPath: ./dist

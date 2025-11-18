@@ -69,27 +69,45 @@ export const useChat = () => {
       sender: 'user',
       text: messageText,
     };
-    setMessages(prev => [...prev, userMessage]);
+    
+    // Create the new message list *before* setting state
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages); // Update UI immediately
+
+    // Add empty AI message for streaming
+    const aiMessageId = Date.now() + 1;
+    const aiMessage: Message = {
+      id: aiMessageId,
+      sender: 'ai',
+      text: '',
+    };
+    setMessages(prev => [...prev, aiMessage]);
 
     try {
-      const response = await api.sendMessage(messageText, selectedDocumentId);
+      // Use streaming API
+      const streamGenerator = api.sendStreamingMessage(messageText, selectedDocumentId, newMessages);
+      let fullResponse = '';
 
-      // Add AI response
-      const aiMessage: Message = {
-        id: Date.now() + 1,
-        sender: 'ai',
-        text: response.data.answer || response.data.error,
-      };
-      setMessages(prev => [...prev, aiMessage]);
+      for await (const chunk of streamGenerator) {
+        fullResponse += chunk;
+        
+        // Update the AI message with accumulated text
+        setMessages(prev => prev.map(msg => 
+          msg.id === aiMessageId 
+            ? { ...msg, text: fullResponse }
+            : msg
+        ));
+      }
 
     } catch (error) {
       console.error("Error fetching response:", error);
-      const errorMessage: Message = {
-        id: Date.now() + 1,
-        sender: 'ai',
-        text: "Sorry, I ran into an error. Please check the server terminal."
-      };
-      setMessages(prev => [...prev, errorMessage]);
+      
+      // Update the AI message with error
+      setMessages(prev => prev.map(msg => 
+        msg.id === aiMessageId 
+          ? { ...msg, text: "Sorry, I ran into an error. Please check the server terminal." }
+          : msg
+      ));
     } finally {
       setIsLoading(false);
     }
