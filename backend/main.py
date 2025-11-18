@@ -113,6 +113,26 @@ def health_check():
     """Keep the service alive"""
     return {"status": "alive", "timestamp": str(datetime.now())}
 
+@app.get("/debug/groq")
+async def debug_groq():
+    """Debug Groq API connection"""
+    try:
+        # Test a simple Groq API call
+        test_response = await llm.ainvoke("Hello, this is a test. Please respond with 'OK'.")
+        return {
+            "status": "success",
+            "groq_response": test_response.content,
+            "model": "llama-3.1-8b-instant",
+            "timestamp": str(datetime.now())
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "error_type": type(e).__name__,
+            "timestamp": str(datetime.now())
+        }
+
 @app.get("/debug/cors")
 def debug_cors():
     return {"cors": "enabled", "origins": ["*"], "methods": ["*"], "headers": ["*"]}
@@ -229,7 +249,8 @@ async def chat_with_doc(request: ChatRequest):
             print(f"Original question: {request.question}")
             print(f"Reformulated question: {reformulated_question}")
         except Exception as e:
-            print(f"Error reformulating question, using original: {e}")
+            print(f"❌ Groq API Error during reformulation: {e}")
+            print(f"Using original question: {request.question}")
             reformulated_question = request.question
 
     # 4. Retrieve documents using reformulated question
@@ -265,8 +286,11 @@ async def chat_with_doc(request: ChatRequest):
                 "chat_history": chat_history
             })
         except Exception as e:
-            print(f"Error in QA chain with history: {e}")
-            raise HTTPException(status_code=500, detail=f"Error processing question: {str(e)}")
+            print(f"❌ Groq API Error in QA chain: {e}")
+            if "500" in str(e) or "Internal server error" in str(e):
+                raise HTTPException(status_code=503, detail="AI service temporarily unavailable. Groq API is experiencing issues. Please try again in a few minutes.")
+            else:
+                raise HTTPException(status_code=500, detail=f"Error processing question: {str(e)}")
     
     else:  # No chat history - simple RAG
         system_prompt = (
