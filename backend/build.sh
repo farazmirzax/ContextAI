@@ -13,7 +13,7 @@ pip install --upgrade pip
 
 # Install torch CPU-only first to avoid CUDA dependencies
 echo "📦 Installing PyTorch CPU-only..."
-pip install torch==2.1.0+cpu torchvision==0.16.0+cpu torchaudio==2.1.0+cpu --index-url https://download.pytorch.org/whl/cpu --no-cache-dir
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu --no-cache-dir
 
 # Install remaining dependencies
 echo "📦 Installing remaining dependencies..."
