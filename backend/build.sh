@@ -19,11 +19,19 @@ pip install torch==2.1.0+cpu torchvision==0.16.0+cpu torchaudio==2.1.0+cpu --ind
 echo "📦 Installing remaining dependencies..."
 pip install -r requirements.txt --no-cache-dir
 
+# Explicitly install python-multipart (sometimes gets missed)
+echo "📦 Ensuring python-multipart is installed..."
+pip install python-multipart==0.0.9 --no-cache-dir
+
 # Verify critical imports work
 echo "✅ Verifying installations..."
 python -c "import fastapi; print('FastAPI OK')"
 python -c "from langchain_groq import ChatGroq; print('Groq OK')"
 python -c "import sentence_transformers; print('SentenceTransformers OK')"
 python -c "import faiss; print('FAISS OK')"
+
+# Explicitly check for python-multipart
+echo "🔍 Checking python-multipart..."
+python -c "import multipart; print('python-multipart OK')" || (echo "❌ python-multipart missing, installing..." && pip install python-multipart==0.0.9)
 
 echo "🎉 Backend build completed successfully!"
