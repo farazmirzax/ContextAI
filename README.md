@@ -104,4 +104,4 @@ Deployed on **Render** (Free Tier):
 MIT License - feel free to use for your projects!
 
 ---
-*Built by [Your Name] - Showcasing modern RAG implementation with conversational AI*
+*Built by Faraz Mirza - Showcasing modern RAG implementation with conversational AI*
