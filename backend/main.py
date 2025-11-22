@@ -84,7 +84,9 @@ async def lifespan(app: FastAPI):
             print(f"✅ LLM model loaded: gpt-3.5-turbo (OpenAI)")
         else:
             print("❌ No fallback API key available")
-            raise Exception("Both Groq and OpenAI unavailable")        print("--- 🚀 Models loaded successfully. Server is ready! ---")
+            raise Exception("Both Groq and OpenAI unavailable")
+        
+    print("--- 🚀 Models loaded successfully. Server is ready! ---")
     except Exception as e:
         print(f"❌ Error loading models: {e}")
         raise
