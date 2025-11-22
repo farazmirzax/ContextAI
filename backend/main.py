@@ -100,8 +100,11 @@ app = FastAPI(lifespan=lifespan)
 allowed_origins = [
     "http://localhost:3000",  # React dev server
     "http://localhost:5173",  # Vite dev server
-    "https://rag-chat-frontend-p5fx.onrender.com",  # Your actual frontend URL
-    "https://your-custom-domain.com",  # If you add a custom domain later
+    "http://localhost:5174",  # Vite dev server (alt port)
+    "https://rag-chat-frontend-p5fx.onrender.com",  # Old Render frontend (backup)
+    "https://context-ai-seven.vercel.app",  # Primary Vercel frontend
+    "https://contextai-*.vercel.app",  # Vercel preview deployments
+    "https://*.vercel.app",  # Allow any Vercel deployment for this project
 ]
 
 # Allow all origins for development, restrict for production
