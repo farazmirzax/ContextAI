@@ -1,11 +1,12 @@
 [build]
   base = "frontend"
-  command = "npm install --include=dev && npm run build"
+  command = "rm -rf node_modules && rm -rf .vite && npm install && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_ENV = "production"
   VITE_API_URL = "https://rag-chat-backend-730g.onrender.com"
+  FORCE_CLEAR_CACHE = "true"
 
 [[redirects]]
   from = "/*"
