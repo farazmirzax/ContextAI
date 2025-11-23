@@ -1,7 +1,10 @@
-// API configuration and utilities
-// CACHE BUST: Force rebuild at 2025-11-23 19:22
-export const API_URL = 'https://rag-chat-backend-730g.onrender.com';
+// API configuration - Clean and simple for Netlify
+const isLocalDev = typeof window !== 'undefined' && 
+  window.location.hostname === 'localhost';
 
-console.log('🚀 API URL (HARDCODED FOR PRODUCTION):', API_URL);
-console.log('🕐 Build timestamp: 2025-11-23 19:22');
-console.log('🔄 Cache bust: FORCE_REBUILD_001');
+export const API_URL = isLocalDev
+  ? 'http://127.0.0.1:8000'  // Local development
+  : 'https://rag-chat-backend-730g.onrender.com';  // Production (Render backend)
+
+console.log('🚀 ContextAI API URL:', API_URL);
+console.log('🌐 Environment:', isLocalDev ? 'Local Dev' : 'Production (Netlify)');
