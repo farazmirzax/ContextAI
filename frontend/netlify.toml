@@ -5,6 +5,7 @@
 
 [build.environment]
   NODE_ENV = "production"
+  VITE_API_URL = "https://rag-chat-backend-730g.onrender.com"
 
 [[redirects]]
   from = "/*"
