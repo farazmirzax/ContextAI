@@ -1,11 +1,6 @@
-// API configuration - Uses environment variables properly
-const isLocalDev = typeof window !== 'undefined' && 
-  window.location.hostname === 'localhost';
+// API configuration - Force production URL for Netlify deployment
+export const API_URL = 'https://rag-chat-backend-730g.onrender.com';
 
-export const API_URL = isLocalDev
-  ? 'http://127.0.0.1:8000'  // Local development
-  : import.meta.env.VITE_API_URL || 'https://rag-chat-backend-730g.onrender.com';
-
-console.log('🚀 ContextAI API URL:', API_URL);
-console.log('🌐 Environment:', isLocalDev ? 'Local Dev' : 'Production (Netlify)');
-console.log('🔧 VITE_API_URL:', import.meta.env.VITE_API_URL);
+console.log('🚀 ContextAI API URL (PRODUCTION):', API_URL);
+console.log('🌐 Hostname:', typeof window !== 'undefined' ? window.location.hostname : 'SSR');
+console.log('🔧 Environment check - VITE_API_URL:', import.meta.env.VITE_API_URL);
