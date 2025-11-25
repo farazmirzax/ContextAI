@@ -84,48 +84,48 @@ export function LandingPage({ onFileUpload, isLoading }: LandingPageProps) {
       <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-4 py-12">
         
         {/* Hero Section */}
-        <div className="text-center mb-16 max-w-4xl">
+        <div className="text-center mb-8 md:mb-16 max-w-4xl px-4 sm:px-6">
           {/* Main Title - Codex Style */}
-          <h1 className="text-8xl md:text-9xl font-light mb-8 tracking-wider">
+          <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-light mb-6 md:mb-8 tracking-wider">
             <span className="text-white">
               ContextAI
             </span>
           </h1>
           
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-400 mb-6 font-light tracking-wide">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-400 mb-4 md:mb-6 font-light tracking-wide">
             Your Intelligent Document Assistant
           </p>
           
           {/* Description */}
-          <p className="text-gray-500 text-lg mb-16 max-w-2xl mx-auto leading-relaxed font-light">
+          <p className="text-base sm:text-lg text-gray-500 mb-8 md:mb-16 max-w-2xl mx-auto leading-relaxed font-light px-2">
             Transform how you interact with documents. Upload any PDF and start having intelligent conversations powered by advanced AI technology.
           </p>
 
           {/* Features - Minimal Style */}
-          <div className="flex justify-center gap-12 mb-16 max-w-4xl mx-auto">
+          <div className="flex justify-center gap-6 sm:gap-8 md:gap-12 mb-8 md:mb-16 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-2xl font-light text-white mb-2">⚡</div>
-              <p className="text-gray-400 text-sm font-light">Lightning Fast</p>
+              <div className="text-xl sm:text-2xl font-light text-white mb-1 sm:mb-2">⚡</div>
+              <p className="text-gray-400 text-xs sm:text-sm font-light">Lightning Fast</p>
             </div>
             
             <div className="text-center">
-              <div className="text-2xl font-light text-white mb-2">🧠</div>
-              <p className="text-gray-400 text-sm font-light">Smart Memory</p>
+              <div className="text-xl sm:text-2xl font-light text-white mb-1 sm:mb-2">🧠</div>
+              <p className="text-gray-400 text-xs sm:text-sm font-light">Smart Memory</p>
             </div>
             
             <div className="text-center">
-              <div className="text-2xl font-light text-white mb-2">🔒</div>
-              <p className="text-gray-400 text-sm font-light">Secure & Private</p>
+              <div className="text-xl sm:text-2xl font-light text-white mb-1 sm:mb-2">🔒</div>
+              <p className="text-gray-400 text-xs sm:text-sm font-light">Secure & Private</p>
             </div>
           </div>
         </div>
 
         {/* Upload Section - Codex Style */}
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-xl px-4">
           <div 
             className={`
-              relative border border-gray-800 rounded-lg p-16 text-center transition-all duration-300
+              relative border border-gray-800 rounded-lg p-8 sm:p-12 md:p-16 text-center transition-all duration-300
               ${isDragOver 
                 ? 'border-gray-600 bg-gray-900/50' 
                 : 'border-gray-800 hover:border-gray-700 bg-gray-950/50'
@@ -143,9 +143,9 @@ export function LandingPage({ onFileUpload, isLoading }: LandingPageProps) {
               </div>
             ) : (
               <>
-                <div className="mb-8">
-                  <h3 className="text-2xl font-light text-white mb-3">Upload PDF</h3>
-                  <p className="text-gray-500 font-light">Drag and drop or click to browse</p>
+                <div className="mb-6 md:mb-8">
+                  <h3 className="text-xl sm:text-2xl font-light text-white mb-2 sm:mb-3">Upload PDF</h3>
+                  <p className="text-sm sm:text-base text-gray-500 font-light">Drag and drop or click to browse</p>
                 </div>
 
                 <input
@@ -158,7 +158,7 @@ export function LandingPage({ onFileUpload, isLoading }: LandingPageProps) {
                 
                 <label
                   htmlFor="file-upload"
-                  className="inline-flex items-center px-8 py-3 bg-white text-black font-medium rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer"
+                  className="inline-flex items-center px-6 sm:px-8 py-2 sm:py-3 bg-white text-black font-medium rounded hover:bg-gray-100 transition-all duration-200 cursor-pointer text-sm sm:text-base"
                 >
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

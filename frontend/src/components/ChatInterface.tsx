@@ -23,7 +23,7 @@ export function ChatInterface({
   onBackToHome,
 }: ChatInterfaceProps) {
   return (
-    <div className="flex h-screen w-full bg-black text-gray-100 relative overflow-hidden">
+    <div className="flex flex-col sm:flex-row h-screen w-full bg-black text-gray-100 relative overflow-hidden">
       {/* Codex-style Background for Chat */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Subtle Grid Pattern */}
@@ -60,11 +60,11 @@ export function ChatInterface({
       {/* Main Chat Area */}
       <div className="flex flex-col flex-1 relative z-10">
         {/* Header - Codex Style */}
-        <header className="text-center p-6 border-b border-gray-800/50 bg-black/80 backdrop-blur-sm">
-          <h1 className="text-3xl font-light text-white mb-2 tracking-wider">
+        <header className="text-center p-3 sm:p-4 md:p-6 border-b border-gray-800/50 bg-black/80 backdrop-blur-sm">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-light text-white mb-1 sm:mb-2 tracking-wider">
             ContextAI
           </h1>
-          <p className="text-sm text-gray-400 font-light">
+          <p className="text-xs sm:text-sm text-gray-400 font-light">
             Intelligent Document Assistant
           </p>
           {selectedDocument && (

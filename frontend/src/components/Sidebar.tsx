@@ -36,7 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="w-60 border-r border-gray-800/50 bg-black/80 backdrop-blur-sm p-4 flex flex-col relative z-10">
+    <div className="w-full sm:w-60 border-r border-gray-800/50 bg-black/80 backdrop-blur-sm p-2 sm:p-4 flex flex-col relative z-10">
       {/* Back to Home Button */}
       {onBackToHome && (
         <button
