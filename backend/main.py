@@ -110,8 +110,8 @@ allowed_origins = [
     "https://farazmirzax.github.io",  # GitHub Pages deployment
 ]
 
-# Allow all origins for development, restrict for production
-cors_origins = ["*"] if os.getenv("ENVIRONMENT") == "development" else allowed_origins
+# Temporarily allow all origins to test GitHub Pages deployment
+cors_origins = ["*"]  # Allow all origins for now
 
 app.add_middleware(
     CORSMiddleware,
