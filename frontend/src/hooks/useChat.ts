@@ -54,8 +54,11 @@ export const useChat = () => {
   };
 
   const handleDocumentSelect = (docId: string) => {
+    // Only clear messages if switching to a different document
+    if (docId !== selectedDocumentId) {
+      setMessages([]); // Clear messages only when switching to different document
+    }
     setSelectedDocumentId(docId);
-    setMessages([]); // Clear messages when switching documents
   };
 
   const handleSendMessage = async (messageText: string) => {
