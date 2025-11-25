@@ -107,6 +107,7 @@ allowed_origins = [
     "https://context-ai-seven.vercel.app",  # Primary Vercel frontend
     "https://contextai-*.vercel.app",  # Vercel preview deployments
     "https://*.vercel.app",  # Allow any Vercel deployment for this project
+    "https://farazmirzax.github.io",  # GitHub Pages deployment
 ]
 
 # Allow all origins for development, restrict for production
