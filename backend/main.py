@@ -4,7 +4,7 @@ import tempfile
 from datetime import datetime
 from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, Response
 from pydantic import BaseModel
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
@@ -110,8 +110,8 @@ allowed_origins = [
     "https://farazmirzax.github.io",  # GitHub Pages deployment
 ]
 
-# Temporarily allow all origins to test GitHub Pages deployment
-cors_origins = ["*"]  # Allow all origins for now
+# Force CORS to allow all origins - GitHub Pages deployment fix
+cors_origins = ["*"]  # Allow all origins for GitHub Pages
 
 app.add_middleware(
     CORSMiddleware,
@@ -130,6 +130,20 @@ def read_root():
 def health_check():
     """Keep the service alive"""
     return {"status": "alive", "timestamp": str(datetime.now())}
+
+@app.options("/{path:path}")
+async def options_handler(path: str):
+    """Handle preflight OPTIONS requests for CORS"""
+    return Response(
+        content="",
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, HEAD",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "3600",
+        }
+    )
 
 @app.get("/debug/groq")
 async def debug_groq():
