@@ -36,6 +36,7 @@ jobs:
       - name: Build
         run: |
           cd frontend
+          rm -rf dist
           npm run build
           
       - name: Setup Pages
