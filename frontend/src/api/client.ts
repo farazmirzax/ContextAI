@@ -1,8 +1,8 @@
 import axios from 'axios';
 import type { Message } from '../types'; // <-- NEW: Import Message type
+import { API_URL } from './config'; // Import from centralized config
 
-// API configuration
-const API_URL = 'http://127.0.0.1:8000';
+// API configuration - using centralized config
 
 // Create axios instance
 const apiClient = axios.create({
