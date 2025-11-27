@@ -186,18 +186,27 @@ async def upload_document(file: UploadFile = File(...)):
     print(f"--- Processing new file: {file.filename} ---")
     
     try:
+        # Read file content
+        content = await file.read()
+        print(f"📄 File size: {len(content)} bytes")
+        
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
-            temp_file.write(await file.read())
+            temp_file.write(content)
             temp_file_path = temp_file.name
 
+        print(f"📖 Loading PDF...")
         loader = PyPDFLoader(temp_file_path)
         docs = loader.load()
+        print(f"✅ Loaded {len(docs)} pages")
 
+        print(f"✂️ Splitting into chunks...")
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         chunks = text_splitter.split_documents(docs)
+        print(f"✅ Created {len(chunks)} chunks")
 
-        print(f"Creating vector store for {file.filename}...")
+        print(f"🧠 Creating vector embeddings (using pre-loaded model)...")
         vector_store = FAISS.from_documents(chunks, embedding=embeddings_model)
+        print(f"✅ Vector store created")
         
         document_id = str(uuid.uuid4())
         vector_stores[document_id] = vector_store
