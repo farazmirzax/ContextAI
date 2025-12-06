@@ -65,9 +65,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
         `}
       >
         {isLoading ? (
-          <div className="flex items-center justify-center">
-            <div className="w-4 h-4 border border-gray-500 border-t-transparent rounded-full animate-spin mr-2"></div>
-            Processing...
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <span className="text-xs">Processing...</span>
+            <div className="w-full bg-gray-700/40 rounded-full h-1.5 overflow-hidden border border-gray-600/30">
+              <div 
+                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                style={{
+                  animation: 'progress 2s ease-in-out infinite',
+                  width: '30%',
+                }}
+              ></div>
+            </div>
+            <style>{`
+              @keyframes progress {
+                0% { width: 10%; }
+                50% { width: 90%; }
+                100% { width: 10%; }
+              }
+            `}</style>
           </div>
         ) : (
           '+ Upload PDF'
