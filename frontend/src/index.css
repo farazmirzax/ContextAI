@@ -120,3 +120,16 @@ body {
     transform: scale(1.2);
   }
 }
+
+/* Progress Bar Animation */
+@keyframes progress {
+  0% {
+    width: 10%;
+  }
+  50% {
+    width: 90%;
+  }
+  100% {
+    width: 10%;
+  }
+}
