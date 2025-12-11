@@ -8,11 +8,13 @@ function App() {
   const {
     messages,
     isLoading,
+    isUploading,
     documents,
     selectedDocument,
     handleFileUpload,
     handleDocumentSelect,
     handleSendMessage,
+    uploadProgress,
   } = useChat();
 
   const handleFileUploadWithTransition = async (file: File) => {
@@ -29,7 +31,8 @@ function App() {
     return (
       <LandingPage
         onFileUpload={handleFileUploadWithTransition}
-        isLoading={isLoading}
+        isLoading={isUploading}
+        uploadProgress={uploadProgress || undefined}
       />
     );
   }
@@ -39,12 +42,14 @@ function App() {
     <ChatInterface
       messages={messages}
       isLoading={isLoading}
+      isUploading={isUploading}
       documents={documents}
       selectedDocument={selectedDocument}
       onDocumentSelect={handleDocumentSelect}
       onFileUpload={handleFileUpload}
       onSendMessage={handleSendMessage}
       onBackToHome={handleBackToHome}
+      uploadProgress={uploadProgress || undefined}
     />
   );
 }

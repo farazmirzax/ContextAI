@@ -8,6 +8,7 @@ interface SidebarProps {
   onDocumentSelect: (docId: string) => void;
   onFileUpload: (file: File) => void;
   onBackToHome?: () => void;
+  uploadProgress?: { step: string; percentage: number };
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -17,6 +18,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onDocumentSelect,
   onFileUpload,
   onBackToHome,
+  uploadProgress,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,24 +67,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         `}
       >
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center space-y-2">
-            <span className="text-xs">Processing...</span>
+          <div className="flex flex-col items-center justify-center space-y-1.5">
+            <span className="text-xs text-gray-300">{uploadProgress?.step || 'Processing...'}</span>
             <div className="w-full bg-gray-700/40 rounded-full h-1.5 overflow-hidden border border-gray-600/30">
               <div 
-                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out"
                 style={{
-                  animation: 'progress 2s ease-in-out infinite',
-                  width: '30%',
+                  width: `${uploadProgress?.percentage || 0}%`,
                 }}
               ></div>
             </div>
-            <style>{`
-              @keyframes progress {
-                0% { width: 10%; }
-                50% { width: 90%; }
-                100% { width: 10%; }
-              }
-            `}</style>
+            <span className="text-xs text-gray-500">{uploadProgress?.percentage || 0}%</span>
           </div>
         ) : (
           '+ Upload PDF'

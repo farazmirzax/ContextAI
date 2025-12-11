@@ -5,8 +5,10 @@ import type { Message, Document } from '../types';
 export const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
+  const [uploadProgress, setUploadProgress] = useState<{ step: string; percentage: number } | null>(null);
 
   // Fetch documents on mount
   useEffect(() => {
@@ -24,12 +26,29 @@ export const useChat = () => {
   const selectedDocument = documents.find(doc => doc.document_id === selectedDocumentId) || null;
 
   const handleFileUpload = async (file: File) => {
-    setIsLoading(true);
+    setIsUploading(true);
     setMessages([]); // Clear chat for new upload
-    
+    setUploadProgress(null);
+
     try {
+      setUploadProgress({ step: '📄 Reading PDF file...', percentage: 10 });
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      setUploadProgress({ step: '☁️ Uploading to server...', percentage: 30 });
       const response = await api.uploadDocument(file);
       const newDoc = response.data;
+      
+      setUploadProgress({ step: '📊 Analyzing document structure...', percentage: 60 });
+      await new Promise(resolve => setTimeout(resolve, 400));
+      
+      setUploadProgress({ step: '🧠 Creating vector embeddings...', percentage: 85 });
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      setUploadProgress({ step: '✨ Finalizing...', percentage: 95 });
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      setUploadProgress({ step: '✅ Complete!', percentage: 100 });
+      await new Promise(resolve => setTimeout(resolve, 300));
       
       // Add new doc to state and select it
       setDocuments(prev => [...prev, newDoc]);
@@ -38,7 +57,7 @@ export const useChat = () => {
       setMessages([{
         id: Date.now(),
         sender: 'ai',
-        text: `Successfully uploaded and processed "${newDoc.filename}". You can now ask questions about it.`
+        text: `✅ Successfully uploaded and processed "${newDoc.filename}". You can now ask questions about it.`
       }]);
 
     } catch (error) {
@@ -46,10 +65,11 @@ export const useChat = () => {
       setMessages([{
         id: Date.now(),
         sender: 'ai',
-        text: "Sorry, I ran into an error uploading that file. Please check the server."
+        text: "❌ Sorry, I ran into an error uploading that file. Please check the server."
       }]);
     } finally {
-      setIsLoading(false);
+      setIsUploading(false);
+      setUploadProgress(null);
     }
   };
 
@@ -119,10 +139,12 @@ export const useChat = () => {
   return {
     messages,
     isLoading,
+    isUploading,
     documents,
     selectedDocument,
     handleFileUpload,
     handleDocumentSelect,
     handleSendMessage,
+    uploadProgress,
   };
 };

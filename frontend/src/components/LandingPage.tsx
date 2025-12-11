@@ -3,9 +3,10 @@ import { useState } from 'react';
 interface LandingPageProps {
   onFileUpload: (file: File) => void;
   isLoading: boolean;
+  uploadProgress?: { step: string; percentage: number };
 }
 
-export function LandingPage({ onFileUpload, isLoading }: LandingPageProps) {
+export function LandingPage({ onFileUpload, isLoading, uploadProgress }: LandingPageProps) {
   const [isDragOver, setIsDragOver] = useState(false);
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -137,9 +138,20 @@ export function LandingPage({ onFileUpload, isLoading }: LandingPageProps) {
             onDrop={handleDrop}
           >
             {isLoading ? (
-              <div className="flex flex-col items-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b border-gray-400 mb-4"></div>
-                <p className="text-gray-400 text-lg font-light">Processing document...</p>
+              <div className="flex flex-col items-center w-full px-4">
+                <div className="mb-4 text-center">
+                  <p className="text-gray-300 text-lg font-light mb-2">{uploadProgress?.step || 'Processing...'}</p>
+                  <p className="text-gray-500 text-sm">{uploadProgress?.percentage || 0}%</p>
+                </div>
+                {/* Progress Bar */}
+                <div className="w-full max-w-md bg-gray-800/50 rounded-full h-2 overflow-hidden border border-gray-700/50">
+                  <div 
+                    className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 transition-all duration-500 ease-out"
+                    style={{
+                      width: `${uploadProgress?.percentage || 0}%`,
+                    }}
+                  ></div>
+                </div>
               </div>
             ) : (
               <>

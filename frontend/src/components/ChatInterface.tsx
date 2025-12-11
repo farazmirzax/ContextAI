@@ -4,23 +4,27 @@ import type { Message, Document } from '../types';
 interface ChatInterfaceProps {
   messages: Message[];
   isLoading: boolean;
+  isUploading?: boolean;
   documents: Document[];
   selectedDocument: Document | null;
   onDocumentSelect: (docId: string) => void;
   onFileUpload: (file: File) => void;
   onSendMessage: (message: string) => void;
   onBackToHome: () => void;
+  uploadProgress?: { step: string; percentage: number };
 }
 
 export function ChatInterface({
   messages,
   isLoading,
+  isUploading,
   documents,
   selectedDocument,
   onDocumentSelect,
   onFileUpload,
   onSendMessage,
   onBackToHome,
+  uploadProgress,
 }: ChatInterfaceProps) {
   return (
     <div className="flex flex-col sm:flex-row h-screen w-full bg-black text-gray-100 relative overflow-hidden">
@@ -51,10 +55,11 @@ export function ChatInterface({
       <Sidebar
         documents={documents}
         selectedDocumentId={selectedDocument?.document_id || null}
-        isLoading={isLoading}
+        isLoading={isUploading || false}
         onDocumentSelect={onDocumentSelect}
         onFileUpload={onFileUpload}
         onBackToHome={onBackToHome}
+        uploadProgress={uploadProgress}
       />
 
       {/* Main Chat Area */}
