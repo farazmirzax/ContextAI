@@ -71,12 +71,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <span className="text-xs text-gray-300">{uploadProgress?.step || 'Processing...'}</span>
             <div className="w-full bg-gray-700/40 rounded-full h-1.5 overflow-hidden border border-gray-600/30">
               <div 
-                className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out"
+                className="relative h-full bg-linear-to-r from-cyan-500 to-blue-500 transition-all duration-500 ease-out rounded-full"
                 style={{
                   width: `${uploadProgress?.percentage || 0}%`,
+                  boxShadow: '0 0 10px rgba(34, 211, 238, 0.45)'
                 }}
-              ></div>
+              >
+                {/* Shimmer glow constrained to the filled width */}
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 h-3 w-1/3 rounded-full bg-white/70 blur-md pointer-events-none"
+                  style={{
+                    animation: 'glowSweep 1.6s linear infinite',
+                    left: '-30%'
+                  }}
+                />
+              </div>
             </div>
+            <style>{`
+              @keyframes glowSweep {
+                0% { left: -30%; }
+                100% { left: 100%; }
+              }
+            `}</style>
             <span className="text-xs text-gray-500">{uploadProgress?.percentage || 0}%</span>
           </div>
         ) : (

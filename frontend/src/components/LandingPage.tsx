@@ -143,15 +143,32 @@ export function LandingPage({ onFileUpload, isLoading, uploadProgress }: Landing
                   <p className="text-gray-300 text-lg font-light mb-2">{uploadProgress?.step || 'Processing...'}</p>
                   <p className="text-gray-500 text-sm">{uploadProgress?.percentage || 0}%</p>
                 </div>
-                {/* Progress Bar */}
+                {/* Progress Bar with Glow Sweep */}
                 <div className="w-full max-w-md bg-gray-800/50 rounded-full h-2 overflow-hidden border border-gray-700/50">
                   <div 
-                    className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 transition-all duration-500 ease-out"
+                    className="relative h-full bg-linear-to-r from-cyan-500 via-blue-500 to-cyan-500 transition-all duration-500 ease-out rounded-full"
                     style={{
                       width: `${uploadProgress?.percentage || 0}%`,
+                      boxShadow: '0 0 14px rgba(34, 211, 238, 0.45)'
                     }}
-                  ></div>
+                  >
+                    {/* Shimmer glow constrained to the filled width */}
+                    <div
+                      className="absolute top-1/2 -translate-y-1/2 h-4 w-1/3 rounded-full bg-white/70 blur-md pointer-events-none"
+                      style={{
+                        animation: 'glowSweep 1.6s linear infinite',
+                        left: '-30%'
+                      }}
+                    />
+                  </div>
                 </div>
+                {/* Local keyframes for the shimmer sweep */}
+                <style>{`
+                  @keyframes glowSweep {
+                    0% { left: -30%; }
+                    100% { left: 100%; }
+                  }
+                `}</style>
               </div>
             ) : (
               <>

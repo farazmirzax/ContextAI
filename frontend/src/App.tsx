@@ -8,7 +8,6 @@ function App() {
   const {
     messages,
     isLoading,
-    isUploading,
     documents,
     selectedDocument,
     handleFileUpload,
@@ -31,7 +30,7 @@ function App() {
     return (
       <LandingPage
         onFileUpload={handleFileUploadWithTransition}
-        isLoading={isUploading}
+        isLoading={isLoading}
         uploadProgress={uploadProgress || undefined}
       />
     );
@@ -42,7 +41,6 @@ function App() {
     <ChatInterface
       messages={messages}
       isLoading={isLoading}
-      isUploading={isUploading}
       documents={documents}
       selectedDocument={selectedDocument}
       onDocumentSelect={handleDocumentSelect}

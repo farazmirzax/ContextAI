@@ -5,7 +5,6 @@ import type { Message, Document } from '../types';
 export const useChat = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState<{ step: string; percentage: number } | null>(null);
@@ -26,7 +25,7 @@ export const useChat = () => {
   const selectedDocument = documents.find(doc => doc.document_id === selectedDocumentId) || null;
 
   const handleFileUpload = async (file: File) => {
-    setIsUploading(true);
+    setIsLoading(true);
     setMessages([]); // Clear chat for new upload
     setUploadProgress(null);
 
@@ -68,7 +67,7 @@ export const useChat = () => {
         text: "❌ Sorry, I ran into an error uploading that file. Please check the server."
       }]);
     } finally {
-      setIsUploading(false);
+      setIsLoading(false);
       setUploadProgress(null);
     }
   };
@@ -139,7 +138,6 @@ export const useChat = () => {
   return {
     messages,
     isLoading,
-    isUploading,
     documents,
     selectedDocument,
     handleFileUpload,

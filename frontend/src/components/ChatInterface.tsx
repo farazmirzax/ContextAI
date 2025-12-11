@@ -4,7 +4,6 @@ import type { Message, Document } from '../types';
 interface ChatInterfaceProps {
   messages: Message[];
   isLoading: boolean;
-  isUploading?: boolean;
   documents: Document[];
   selectedDocument: Document | null;
   onDocumentSelect: (docId: string) => void;
@@ -17,7 +16,6 @@ interface ChatInterfaceProps {
 export function ChatInterface({
   messages,
   isLoading,
-  isUploading,
   documents,
   selectedDocument,
   onDocumentSelect,
@@ -55,7 +53,7 @@ export function ChatInterface({
       <Sidebar
         documents={documents}
         selectedDocumentId={selectedDocument?.document_id || null}
-        isLoading={isUploading || false}
+        isLoading={isLoading}
         onDocumentSelect={onDocumentSelect}
         onFileUpload={onFileUpload}
         onBackToHome={onBackToHome}
