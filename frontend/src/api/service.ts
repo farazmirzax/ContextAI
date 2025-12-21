@@ -25,6 +25,7 @@ export const apiService = {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
+        timeout: 120000, // 2 minutes timeout for large PDFs
       });
       return response.data;
     } catch (error) {
@@ -39,6 +40,8 @@ export const apiService = {
       const response = await axios.post(`${API_URL}/chat`, {
         question,
         document_id: documentId
+      }, {
+        timeout: 60000, // 60 seconds timeout for chat responses
       });
       return response.data.answer || response.data.error;
     } catch (error) {

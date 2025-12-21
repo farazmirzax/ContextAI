@@ -1,7 +1,13 @@
-// API configuration - NUCLEAR REBUILD 2025-11-23-21:12
-export const API_URL = 'https://rag-chat-backend-730g.onrender.com';
+// API configuration - Smart environment detection
+const isProduction = import.meta.env.PROD;
+const isLocalhost = typeof window !== 'undefined' && 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
-console.log('🚀🚀🚀 ContextAI API URL (FORCED PRODUCTION - BUILD 21:12):', API_URL);
-console.log('🌐 Hostname:', typeof window !== 'undefined' ? window.location.hostname : 'SSR');
-console.log('⚡ NUCLEAR REBUILD TIMESTAMP: 2025-11-23-21:12');
-console.log('🔧 Environment check - VITE_API_URL:', import.meta.env.VITE_API_URL);
+// Use localhost when running locally, production URL when deployed
+export const API_URL = isLocalhost 
+  ? 'http://localhost:8000' 
+  : 'https://rag-chat-backend-730g.onrender.com';
+
+console.log('🚀 ContextAI API URL:', API_URL);
+console.log('🌐 Environment:', isLocalhost ? 'LOCAL' : 'PRODUCTION');
+console.log('🔧 Hostname:', typeof window !== 'undefined' ? window.location.hostname : 'SSR');
