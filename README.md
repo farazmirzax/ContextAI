@@ -1,4 +1,4 @@
-# � ContextAI - Intelligent Document Assistant
+# 💬 ContextAI - Intelligent Document Assistant
 
 A production-ready Retrieval-Augmented Generation (RAG) application built with FastAPI, React, and LangChain. ContextAI transforms how you interact with documents through intelligent conversation and streaming responses.
 
