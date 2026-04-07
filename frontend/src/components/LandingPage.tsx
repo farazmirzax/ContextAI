@@ -84,6 +84,17 @@ export function LandingPage({ onFileUpload, isLoading, uploadProgress }: Landing
       {/* Main Content */}
       <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-4 py-12">
         
+        {/* ⚠️ Startup Time Warning Banner */}
+        <div className="w-full max-w-4xl mb-8 p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+          <div className="flex items-start gap-3">
+            <span className="text-yellow-400 mt-0.5">⏱️</span>
+            <div className="flex-1 text-sm">
+              <p className="text-yellow-300 font-medium mb-1">First-time loading may take 30-60 seconds</p>
+              <p className="text-yellow-200/70 text-xs">This app runs on a free tier server that needs to warm up on first use. Subsequent uploads and chats will be instant!</p>
+            </div>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <div className="text-center mb-8 md:mb-16 max-w-4xl px-4 sm:px-6">
           {/* Main Title - Codex Style */}
