@@ -29,21 +29,22 @@ ContextAI solves the problem of **interacting with document content at scale**:
 ### High-Level Flow
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
 graph TB
-    subgraph Frontend["Frontend (React + TypeScript)"]
+    subgraph Frontend["🎨 Frontend (React + TypeScript)"]
         UI["Landing Page & Chat UI"]
         Upload["Drag-Drop Upload"]
         Chat["Real-Time Chat"]
     end
     
-    subgraph Backend["Backend (FastAPI - Render)"]
+    subgraph Backend["⚙️ Backend (FastAPI - Render)"]
         API["REST API Endpoints"]
         Upload_EP["/upload"]
         Chat_EP["/chat & /chat/stream"]
         Docs_EP["/documents"]
     end
     
-    subgraph AI["AI & Vector Search"]
+    subgraph AI["🧠 AI & Vector Search"]
         HF["HuggingFace Embeddings"]
         FAISS["FAISS Vector DB"]
         Groq["Groq LLM<br/>llama-3.1-8b"]
@@ -58,44 +59,51 @@ graph TB
     Chat_EP --> FAISS
     Chat_EP --> Groq
     
-    style Frontend fill:#e1f5ff
-    style Backend fill:#fff3e0
-    style AI fill:#f3e5f5
+    style Frontend fill:#1f1f2e,stroke:#00d4ff,color:#fff
+    style Backend fill:#1f1f2e,stroke:#00ff88,color:#fff
+    style AI fill:#1f1f2e,stroke:#ff006e,color:#fff
 ```
 
 ### Document Processing Pipeline
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
 graph LR
-    A["PDF Upload"] --> B["PyPDFLoader<br/>Extract Text"]
-    B --> C["RecursiveCharacterTextSplitter<br/>500 char chunks<br/>50 overlap"]
-    C --> D["HuggingFaceEmbeddings<br/>all-MiniLM-L6-v2<br/>384-dim vectors"]
-    D --> E["FAISS Vector Store<br/>Semantic Search"]
-    E --> F["In-Memory Storage<br/>Fast Access"]
+    A["📄 PDF Upload"] --> B["📖 PyPDFLoader<br/>Extract Text"]
+    B --> C["✂️ Split Text<br/>500 char chunks<br/>50 overlap"]
+    C --> D["🔢 Embeddings<br/>all-MiniLM-L6-v2<br/>384-dim"]
+    D --> E["🔍 FAISS<br/>Vector Store"]
+    E --> F["💾 In-Memory<br/>Storage"]
     
-    style A fill:#c8e6c9
-    style B fill:#bbdefb
-    style C fill:#ffe0b2
-    style D fill:#f8bbd0
-    style E fill:#e1bee7
-    style F fill:#b2dfdb
+    style A fill:#00ff88,stroke:#00ff88,color:#000
+    style B fill:#00d4ff,stroke:#00d4ff,color:#000
+    style C fill:#ffa700,stroke:#ffa700,color:#000
+    style D fill:#ff006e,stroke:#ff006e,color:#fff
+    style E fill:#8338ec,stroke:#8338ec,color:#fff
+    style F fill:#ffbe0b,stroke:#ffbe0b,color:#000
 ```
 
 ### Query-to-Answer Flow
 
 ```mermaid
+%%{init: {'theme':'dark'}}%%
 graph TD
-    A["User Question<br/>+ Chat History"] --> B["History-Aware<br/>Reformulation"]
-    B --> C["FAISS Retrieval<br/>Top 3 Chunks"]
-    C --> D["LangChain Prompt<br/>Assembly"]
-    D --> E["System Prompt<br/>+ History<br/>+ Context<br/>+ Question"]
-    E --> F["Groq API<br/>llama-3.1-8b-instant"]
-    F --> G["Streaming Response<br/>Token by Token"]
-    G --> H["Real-Time Display<br/>Typewriter Effect"]
+    A["❓ User Question<br/>+ Chat History"] --> B["🔄 History-Aware<br/>Reformulation"]
+    B --> C["🔍 FAISS Retrieval<br/>Top 3 Chunks"]
+    C --> D["📝 LangChain Prompt<br/>Assembly"]
+    D --> E["🎯 System Prompt<br/>+ History<br/>+ Context<br/>+ Question"]
+    E --> F["⚡ Groq API<br/>llama-3.1-8b-instant"]
+    F --> G["📡 Streaming Response<br/>Token by Token"]
+    G --> H["✨ Real-Time Display<br/>Typewriter Effect"]
     
-    style A fill:#c8e6c9
-    style F fill:#ffccbc
-    style H fill:#b2dfdb
+    style A fill:#00ff88,stroke:#00ff88,color:#000
+    style B fill:#00d4ff,stroke:#00d4ff,color:#000
+    style C fill:#ffa700,stroke:#ffa700,color:#000
+    style D fill:#ff006e,stroke:#ff006e,color:#fff
+    style E fill:#8338ec,stroke:#8338ec,color:#fff
+    style F fill:#ffbe0b,stroke:#ffbe0b,color:#000
+    style G fill:#00d4ff,stroke:#00d4ff,color:#000
+    style H fill:#00ff88,stroke:#00ff88,color:#000
 ```
 
 ---
