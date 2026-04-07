@@ -75,12 +75,12 @@ graph LR
     D --> E["🔍 FAISS<br/>Vector Store"]
     E --> F["💾 In-Memory<br/>Storage"]
     
-    style A fill:#00ff88,stroke:#00ff88,color:#000,font-weight:bold
-    style B fill:#00d4ff,stroke:#00d4ff,color:#000,font-weight:bold
-    style C fill:#ffa700,stroke:#ffa700,color:#000,font-weight:bold
-    style D fill:#ff006e,stroke:#ff006e,color:#fff,font-weight:bold
-    style E fill:#8338ec,stroke:#8338ec,color:#fff,font-weight:bold
-    style F fill:#ffbe0b,stroke:#ffbe0b,color:#000,font-weight:bold
+    style A fill:#00ff88,stroke:#00ff88,color:#1a1a1a
+    style B fill:#00d4ff,stroke:#00d4ff,color:#1a1a1a
+    style C fill:#ffa700,stroke:#ffa700,color:#1a1a1a
+    style D fill:#ff006e,stroke:#ff006e,color:#f0f0f0
+    style E fill:#8338ec,stroke:#8338ec,color:#f0f0f0
+    style F fill:#ffbe0b,stroke:#ffbe0b,color:#1a1a1a
 ```
 
 ### Query-to-Answer Flow
@@ -96,14 +96,14 @@ graph TD
     F --> G["📡 Streaming Response<br/>Token by Token"]
     G --> H["✨ Real-Time Display<br/>Typewriter Effect"]
     
-    style A fill:#00ff88,stroke:#00ff88,color:#000
-    style B fill:#00d4ff,stroke:#00d4ff,color:#000
-    style C fill:#ffa700,stroke:#ffa700,color:#000
-    style D fill:#ff006e,stroke:#ff006e,color:#fff
-    style E fill:#8338ec,stroke:#8338ec,color:#fff
-    style F fill:#ffbe0b,stroke:#ffbe0b,color:#000
-    style G fill:#00d4ff,stroke:#00d4ff,color:#000
-    style H fill:#00ff88,stroke:#00ff88,color:#000
+    style A fill:#00ff88,stroke:#00ff88,color:#1a1a1a
+    style B fill:#00d4ff,stroke:#00d4ff,color:#1a1a1a
+    style C fill:#ffa700,stroke:#ffa700,color:#1a1a1a
+    style D fill:#ff006e,stroke:#ff006e,color:#f0f0f0
+    style E fill:#8338ec,stroke:#8338ec,color:#f0f0f0
+    style F fill:#ffbe0b,stroke:#ffbe0b,color:#1a1a1a
+    style G fill:#00d4ff,stroke:#00d4ff,color:#1a1a1a
+    style H fill:#00ff88,stroke:#00ff88,color:#1a1a1a
 ```
 
 ---
