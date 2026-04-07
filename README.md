@@ -8,7 +8,7 @@
 
 A **production-ready Retrieval-Augmented Generation (RAG)** application that enables intelligent conversations with PDF documents. Built for sub-200ms retrieval latency, streaming responses, and scalable inference.
 
-**[🚀 Live Demo](https://context-ai-seven.vercel.app)** | **[📚 Backend API](https://rag-chat-backend-730g.onrender.com/docs)** | **[💻 GitHub](https://github.com/farazmirzax/ContextAI)**
+**[🚀 Live Demo](https://farazmirzax.github.io/ContextAI/)** | **[📚 Backend API](https://rag-chat-backend-730g.onrender.com/docs)**
 
 ---
 
@@ -27,67 +27,75 @@ ContextAI solves the problem of **interacting with document content at scale**:
 ## 🏗️ System Architecture
 
 ### High-Level Flow
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     USER (Browser)                          │
-├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  Frontend (React + TypeScript)                              │
-│  ├─ Landing page with drag-drop upload                     │
-│  ├─ Chat interface with real-time streaming               │
-│  └─ Sidebar with document management                       │
-│                          ↓                                   │
-│  ┌──────────────────────────────────────────┐              │
-│  │  Backend (FastAPI) - Render Free Tier    │              │
-│  ├──────────────────────────────────────────┤              │
-│  │ /upload          → PDF ingestion          │              │
-│  │ /chat            → Direct Q&A             │              │
-│  │ /chat/stream     → Streaming responses    │              │
-│  │ /documents       → Document management   │              │
-│  └──────────────────────────────────────────┘              │
-│           ↓              ↓              ↓                    │
-│    ┌──────────┐   ┌──────────┐   ┌──────────┐             │
-│    │ HuggingFace │  │  FAISS   │   │  Groq LLM│             │
-│    │ Embeddings  │  │ Vector   │   │ (llama-  │             │
-│    │(1536-dim)   │  │   DB     │   │ 3.1-8b)  │             │
-│    └──────────────┘  └──────────┘   └──────────┘             │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
+
+```mermaid
+graph TB
+    subgraph Frontend["Frontend (React + TypeScript)"]
+        UI["Landing Page & Chat UI"]
+        Upload["Drag-Drop Upload"]
+        Chat["Real-Time Chat"]
+    end
+    
+    subgraph Backend["Backend (FastAPI - Render)"]
+        API["REST API Endpoints"]
+        Upload_EP["/upload"]
+        Chat_EP["/chat & /chat/stream"]
+        Docs_EP["/documents"]
+    end
+    
+    subgraph AI["AI & Vector Search"]
+        HF["HuggingFace Embeddings"]
+        FAISS["FAISS Vector DB"]
+        Groq["Groq LLM<br/>llama-3.1-8b"]
+    end
+    
+    UI --> Upload
+    UI --> Chat
+    Upload --> Upload_EP
+    Chat --> Chat_EP
+    Upload_EP --> HF
+    HF --> FAISS
+    Chat_EP --> FAISS
+    Chat_EP --> Groq
+    
+    style Frontend fill:#e1f5ff
+    style Backend fill:#fff3e0
+    style AI fill:#f3e5f5
 ```
 
 ### Document Processing Pipeline
-```
-PDF Upload
-    ↓
-PyPDFLoader (Extract text)
-    ↓
-RecursiveCharacterTextSplitter (500 char chunks, 50 overlap)
-    ↓
-HuggingFaceEmbeddings (all-MiniLM-L6-v2, 384-dim vectors)
-    ↓
-FAISS Vector Store (semantic search, top-3 retrieval)
-    ↓
-In-Memory Storage (fast access, no database needed)
+
+```mermaid
+graph LR
+    A["PDF Upload"] --> B["PyPDFLoader<br/>Extract Text"]
+    B --> C["RecursiveCharacterTextSplitter<br/>500 char chunks<br/>50 overlap"]
+    C --> D["HuggingFaceEmbeddings<br/>all-MiniLM-L6-v2<br/>384-dim vectors"]
+    D --> E["FAISS Vector Store<br/>Semantic Search"]
+    E --> F["In-Memory Storage<br/>Fast Access"]
+    
+    style A fill:#c8e6c9
+    style B fill:#bbdefb
+    style C fill:#ffe0b2
+    style D fill:#f8bbd0
+    style E fill:#e1bee7
+    style F fill:#b2dfdb
 ```
 
 ### Query-to-Answer Flow
-```
-User Question + Chat History
-    ↓
-[History-Aware Reformulation] (optional, if chat history exists)
-    ↓
-FAISS Retrieval (top 3 semantically similar chunks)
-    ↓
-LangChain Prompt Template
-    ├─ System prompt (role instruction)
-    ├─ Chat history (conversation context)
-    └─ Retrieved context + question
-    ↓
-Groq API (llama-3.1-8b-instant)
-    ↓
-Streaming Response (SSE → Frontend)
-    ↓
-Real-Time Display (typewriter effect)
+
+```mermaid
+graph TD
+    A["User Question<br/>+ Chat History"] --> B["History-Aware<br/>Reformulation"]
+    B --> C["FAISS Retrieval<br/>Top 3 Chunks"]
+    C --> D["LangChain Prompt<br/>Assembly"]
+    D --> E["System Prompt<br/>+ History<br/>+ Context<br/>+ Question"]
+    E --> F["Groq API<br/>llama-3.1-8b-instant"]
+    F --> G["Streaming Response<br/>Token by Token"]
+    G --> H["Real-Time Display<br/>Typewriter Effect"]
+    
+    style A fill:#c8e6c9
+    style F fill:#ffccbc
+    style H fill:#b2dfdb
 ```
 
 ---
